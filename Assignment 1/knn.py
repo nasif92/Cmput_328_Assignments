@@ -1,4 +1,18 @@
 def knn(x_train, y_train, x_test, n_classes, device):
+    """
+    x_train: 60000 x 784 matrix: each row is a flattened image of an MNIST digit
+    y_train: 60000 vector: label for x_train
+    x_test: 1000 x 784 testing images
+    n_classes: no. of classes in the classification task
+    device: pytorch device on which to run the code
+    return: predicted y_test which is a 1000-sized vector
+    """
+    """
+    x_train: 60000 x 784 matrix: each row is a flattened image of an MNIST digit
+    y_train: 60000 vector: label for x_train
+    x_test: 5000 x 784 testing images
+    return: predicted y_test which is a 5000 vector
+    """
     # convert data to tensors
     xt_test = torch.tensor(x_test, dtype=torch.float, device=device)
     xt_train = torch.tensor(x_train, dtype=torch.float, device=device)
@@ -21,7 +35,7 @@ def knn(x_train, y_train, x_test, n_classes, device):
       # m_cls =  torch.argmax(cls)
 
       # as one hot vector of size 10
-      vect = torch.nn.functional.one_hot(cls.to(torch.int64), 10)
+      vect = torch.nn.functional.one_hot(cls.to(torch.int64), n_classes)
 
       # col wise sum of this of this vect array
       s = torch.sum(vect, 0)
